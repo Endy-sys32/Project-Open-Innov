@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+    <main>
+        <div class="title">Liens</div>
+        <div class="content">
+
+            {% if title == "Produit" %}
+                <a href={% url "index" %}> Accueil</a>
+            {% else  %}
+            <a href={% url "produit" %}> Produit </a>
+            {% endif %}
+
+        </div>
+    </main>
+{% endblock %}
