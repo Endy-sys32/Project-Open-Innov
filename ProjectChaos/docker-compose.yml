@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: open_innov
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+    ports:
+      - "3306:3306"
+
+  web:
+    build: .
+    command: python manage.py runserver
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_HOST: db  # Utilise le nom du service du conteneur MySQL défini ci-dessus
+      MYSQL_ROOT_PASSWORD: your_password  # Mot de passe root de MySQL
+    ports:
+      - "8080:80"
+    depends_on:
+      - db

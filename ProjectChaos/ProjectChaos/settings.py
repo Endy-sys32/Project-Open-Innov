@@ -81,6 +81,18 @@ DATABASES = {
     }
 }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'your_db_name',
+#         'USER': 'your_db_user',
+#         'PASSWORD': 'your_db_password',
+#         'HOST': 'db',  # Nom du service Docker Compose pour MySQL
+#         'PORT': '3306',
+#     }
+# }
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
