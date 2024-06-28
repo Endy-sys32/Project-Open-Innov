@@ -74,23 +74,23 @@ WSGI_APPLICATION = 'ProjectChaos.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'your_db_name',
-#         'USER': 'your_db_user',
-#         'PASSWORD': 'your_db_password',
-#         'HOST': 'db',  # Nom du service Docker Compose pour MySQL
-#         'PORT': '3306',
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'chaos_db',
+        'USER': 'my_user',
+        'PASSWORD': 'my_password',
+        'HOST': 'mysql',  # Nom du service Docker Compose pour MySQL
+        'PORT': '3306',
+    }
+}
 
 
 

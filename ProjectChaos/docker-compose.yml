@@ -1,32 +1,42 @@
 version: '3'
 
 services:
-  db:
+  mysql:
     image: mysql:5.7
+    container_name: mysql
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: open_innov
-      MYSQL_USER: root
-      MYSQL_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: chaos_db
+      MYSQL_USER: my_user
+      MYSQL_PASSWORD: my_password
     ports:
       - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    environment:
+      PMA_HOST: mysql
+      MYSQL_ROOT_PASSWORD: root_password
+    ports:
+      - "8080:80"
+    depends_on:
+      - mysql
 
   web:
     build: .
-    command: python manage.py runserver
+    container_name: django_app
+    command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/code
     ports:
       - "8000:8000"
     depends_on:
-      - db
-
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
+      - mysql
     environment:
-      PMA_HOST: db  # Utilise le nom du service du conteneur MySQL défini ci-dessus
-      MYSQL_ROOT_PASSWORD: your_password  # Mot de passe root de MySQL
-    ports:
-      - "8080:80"
-    depends_on:
-      - db
+      - DEBUG=1
+
+volumes:
+  mysql_data:
